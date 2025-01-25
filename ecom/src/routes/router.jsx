@@ -11,6 +11,8 @@ import Login from "../components/login";
 import UserDashboard from "../components/dashboard/roleTypes/userDashboard";
 import Dashboard from "../components/dashboard";
 import Products from "../components/products";
+import AdminDashboard from "../components/dashboard/roleTypes/adminDashboard";
+import Users from "../components/users";
 
 
 export const publicRouter = () => {
@@ -41,7 +43,7 @@ export const publicRouter = () => {
   );
 };
 
-export const privateRouter = (isUserLoggedIn=false) => {
+export const privateRouter = (isUserLoggedIn=false,getRole) => {
   return createBrowserRouter(
     createRoutesFromElements(
       <>
@@ -50,8 +52,10 @@ export const privateRouter = (isUserLoggedIn=false) => {
           element={isUserLoggedIn ? <Dashboard /> : <Navigate to={"/login"} />}
           errorElement={<Error to={"/"} />}
         >
-          <Route index element={<UserDashboard />} />
-          <Route exact path="products" element={<Products />} />
+          <Route index element={getRole == 'User' ? <UserDashboard /> : getRole == 'Admin' ? <AdminDashboard /> : <Navigate to={"/"} />} />
+          <Route exact path="products" element={getRole == 'User' ? <Products />:  <Navigate to={"/"} />} />
+          <Route exact path="users" element={getRole == 'Admin'? <Users />: <Navigate to={"/"} />} />
+
 
 
           <Route path="*" element={<Navigate to={"/"} />} />

@@ -2,12 +2,12 @@
 import React, {  useState } from "react";
 import {  Menu, Row } from "antd";
 import { Link } from "react-router-dom";
-import { DashboardIcon } from "../../common/svgIcons";
-// import { getCookie } from "../../../utils/cookie-function";
+import { DashboardIcon, CustomersIcon } from "../../common/svgIcons";
+import { getCookie } from "../../../utils/cookie-function";
 
 const SidebarMenu = ({ pathname, collapsed }) => {
   const [openKeys, setOpenKeys] = useState([]);
-  // const getRole = getCookie('role');
+  const getRole = getCookie('role');
 
   const onOpenChange = (openKeys) => {
     setOpenKeys(openKeys);
@@ -42,6 +42,35 @@ const SidebarMenu = ({ pathname, collapsed }) => {
       icon: <DashboardIcon />
     }
   ];
+  const adminItems = [
+    {
+
+      label: <Link to="/" style={{
+        color: collapsed? 'white' : pathname === '' ? '#7047EB' : "#2D2939",
+        fontFamily: "Roboto Flex",
+        fontSize: "16px",
+        fontStyle: "normal",
+        fontWeight: 400,
+        lineHeight: "normal",
+        marginLeft: '4px'
+      }} >{'Dashboard'}</Link>,
+      key: '',
+      icon: <DashboardIcon />,
+    },
+    {
+      label: <Link to="/users" style={{
+        color: collapsed? 'white' : pathname === 'users' ? '#7047EB' : "#2D2939",
+        fontFamily: "Roboto Flex",
+        fontSize: "16px",
+        fontStyle: "normal",
+        fontWeight: 400,
+        lineHeight: "normal",
+        marginLeft: '6px'
+      }} >{'Users'}</Link>,
+      key: 'users',
+      icon: <CustomersIcon />
+    },
+  ];
 
   return (
     <React.Fragment
@@ -63,7 +92,7 @@ const SidebarMenu = ({ pathname, collapsed }) => {
           //   theme="dark"
           mode="inline"
           defaultSelectedKeys={[pathname]}
-          items={items}
+          items={getRole === 'User'? items : getRole === 'Admin' ? adminItems : []}
           openKeys={openKeys}
           onOpenChange={onOpenChange}
         />

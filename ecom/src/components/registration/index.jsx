@@ -1,22 +1,34 @@
 /* eslint-disable no-unused-vars */
-import {  useState } from "react";
+import { useState } from "react";
 import "./index.scss";
-import { Form, Input, Button, message, Checkbox } from "antd";
-import { Link } from "react-router-dom";
+import { Form, Input, Button, message, Checkbox, Radio } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 
-import { useLoginUserMutation } from "../../features/auth/api";
+import { useRegisterUserMutation } from "../../features/auth/api";
 import TopBarProgress from "react-topbar-progress-indicator";
 
 const Registration = () => {
-  const [login, { isLoading }] = useLoginUserMutation();
-  // const navigate = useNavigate();
+  const [register, { isLoading }] = useRegisterUserMutation();
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [errorMsg, setError] = useState(null);
 
   const handleRegistration = async (values) => {
-    login({ body: values })
+    // console.log(values);
+    register({
+      body: {
+        name: values?.name,
+        contact_no: values?.contact_no,
+        password: values?.password,
+        email: values?.email,
+        role_id: values?.role_id,
+      },
+    })
       .unwrap()
-      .then(() => { })
+      .then((res) => {
+        message.success(res?.message);
+        navigate("/login");
+      })
       .catch((err) => {
         message.error(err?.data?.error);
       });
@@ -51,8 +63,14 @@ const Registration = () => {
               </Link>
             </div>
           </div>
+          <Form.Item label="Role" name="role_id" style={{ minWidth: "208px" }} rules={[{ required: true, message: "Please select role!" }]} >
+            <Radio.Group size="large" >
+              <Radio.Button value={1}>ADMIN</Radio.Button>
+              <Radio.Button value={2}>USER</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
           <Form.Item
-            name="username"
+            name="name"
             label="Full Name"
             rules={[
               {
@@ -74,7 +92,7 @@ const Registration = () => {
             />
           </Form.Item>
           <Form.Item
-            name="phoneNumber"
+            name="contact_no"
             label="Mobile No."
             rules={[
               {

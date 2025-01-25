@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 import {  useState } from "react";
-import { Form, Input, Button, message, Checkbox } from "antd";
+import { Form, Input, Button, message, Checkbox, Radio } from "antd";
 // import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.scss";
 import { useLoginUserMutation } from "../../features/auth/api";
 import TopBarProgress from "react-topbar-progress-indicator";
 
 const Login = () => {
   const [login, { isLoading }] = useLoginUserMutation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [errorMsg, setError] = useState(null);
   // const username = 'superadmin@tripplanner.com'
@@ -18,7 +18,10 @@ const Login = () => {
   const handleLogin = async (values) => {
     login({ body: values })
       .unwrap()
-      .then(() => { })
+      .then((res) => {
+        // message.success(res?.message);
+        // navigate("/");
+      })
       .catch((err) => {
         message.error(err?.data?.error);
       });
@@ -45,13 +48,19 @@ const Login = () => {
             <span className="form-top-heading-text">Welcome!</span>
             <span className="form-top-subheading-text">Login</span>
           </div>
+          <Form.Item label="Role" name="role_id" style={{ minWidth: "208px" }} rules={[{ required: true, message: "Please select role!" }]} >
+            <Radio.Group size="large" >
+              <Radio.Button value={1}>ADMIN</Radio.Button>
+              <Radio.Button value={2}>USER</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
           <Form.Item
-            name="username"
-            label="Username"
+            name="email"
+            label="Email"
             rules={[
               {
                 required: true,
-                message: "Please input Username!",
+                message: "Please input email!",
               },
             ]}
           >
@@ -63,7 +72,7 @@ const Login = () => {
               //     className="site-form-item-icon"
               //   />
               // }
-              placeholder="Username"
+              placeholder="email"
               type="email"
             />
           </Form.Item>
