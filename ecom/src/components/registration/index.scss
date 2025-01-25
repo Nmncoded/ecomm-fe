@@ -1,0 +1,140 @@
+.registration {
+  height: 100vh;
+  // width: 100%;
+  // overflow-y: scroll;
+
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #7047eb;
+    border-color: #7047eb;
+  }
+  .ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover
+    .ant-checkbox-checked:not(.ant-checkbox-disabled)
+    .ant-checkbox-inner {
+    border-color: #7047eb;
+    background-color: #7047eb;
+  }
+  .ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover
+    .ant-checkbox-inner,
+  :where(.css-dev-only-do-not-override-uucaq4).ant-checkbox:not(
+      .ant-checkbox-disabled
+    ):hover
+    .ant-checkbox-inner {
+    border-color: #7047eb;
+  }
+
+  .registration-wrapper {
+    min-height: 100%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f6f5f8;
+
+    .form-outer-text {
+      // margin-top: -125px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /*---registration form ----*/
+    .registration-form {
+      margin: 0 auto;
+      padding: 15px 30px;
+      box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      border: 0.5px solid #cccccc9f;
+      border-radius: 5px;
+
+      label {
+        font-family: Roboto Flex;
+      }
+
+      &:hover {
+        box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.24);
+      }
+
+      .form-top {
+        text-align: center;
+        // padding: 45px;
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+
+        .form-top-heading-text {
+          font-size: 32px;
+          font-weight: 700;
+          font-family: Roboto Flex;
+          color: #2d2939;
+        }
+
+        .form-top-subheading-text-area {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-family: Roboto Flex;
+          font-weight: 400;
+
+          .bottom-text-left {
+            color: #6a6a6a;
+          }
+
+          .bottom-text-right {
+            color: #7047eb;
+            font-weight: 600;
+            margin-left: 3px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .checkbox-area {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: Roboto Flex;
+        margin-top: 25px;
+
+        .checkbox-text {
+          font-size: 14px;
+          color: #8b8b8b;
+          margin-left: 8px;
+        }
+      }
+
+      .form-bottom-text-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Roboto Flex;
+        font-weight: 400;
+
+        .bottom-text-left {
+          color: #6a6a6a;
+        }
+
+        .bottom-text-right {
+          color: #7047eb;
+          font-weight: 600;
+          margin-left: 3px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 492px) {
+  .registration {
+    min-height: 100vh;
+    overflow: scroll;
+    .registration-wrapper {
+      width: 100%;
+      .registration-form {
+        width: 100%;
+      }
+    }
+  }
+}
