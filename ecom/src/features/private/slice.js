@@ -7,6 +7,7 @@ const privateSlice = createSlice({
   initialState: {
     allProductsData : [],
     isSidebarCollapsed: true,
+  
   },
   reducers: {
     setSidebarCollapsed: (state, action) => {

@@ -1,16 +1,20 @@
 import React from "react";
 import "./header.scss";
 import { Divider, Dropdown, Layout, Row, Space, theme, Button } from "antd";
-import {  DownArrowIcon, Logo, UserIcon } from "../../common/svgIcons";
+import { DownArrowIcon, Logo, UserIcon } from "../../common/svgIcons";
 // import { LogoutOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../features/auth/slice";
-const {  Header } = Layout;
+const { Header } = Layout;
 import ProfileImage from "../../../assets/profile/profile-image.png";
 import MenuIcon from "../../../assets/profile/menu-icon.png";
 import { getCookie } from "../../../utils/cookie-function";
+import { useNavigate } from "react-router-dom";
+import { ShoppingBag } from "lucide-react";
 
 const GlobalHeader = () => {
+  const navigate = useNavigate()
+  const cartItems= 0;
   const {
     token: { globalHeaderColor },
   } = theme.useToken();
@@ -41,7 +45,9 @@ const GlobalHeader = () => {
               }}
             >
               <img
-                src={profileData?.agencyDetails?.company_logo || ProfileImage || ''}
+                src={
+                  profileData?.agencyDetails?.company_logo || ProfileImage || ""
+                }
                 alt="profile-image"
                 width="64"
               />
@@ -170,11 +176,10 @@ const GlobalHeader = () => {
 
   return (
     <Header
-      className="header-area"
       style={{
         position: "sticky",
         top: 0,
-        zIndex: 2,
+        zIndex: 10,
         width: "100%",
         display: "flex",
         alignItems: "center",
@@ -186,6 +191,15 @@ const GlobalHeader = () => {
         <Logo />
         <Row justify={"space-between"} align={"middle"}>
           <Space size={"small"}>
+            <Button
+              onClick={() => navigate("/cart")}
+              style={{ display: "flex", alignItems: "center", borderRadius: '100%',background:'black',padding: '1rem .5rem' }}
+            >
+              <ShoppingBag size={20} color="white" />
+              <span style={{ marginLeft: '.5rem',fontSize: '.9rem', lineHeight: '1.25rem',fontWeight:500, color:'white' }}>
+                {cartItems?.length || 0}
+              </span>
+            </Button>
             <UserIcon />
             <Dropdown
               className="dropdown-area"

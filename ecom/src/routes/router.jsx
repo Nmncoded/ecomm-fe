@@ -13,6 +13,7 @@ import Dashboard from "../components/dashboard";
 import Products from "../components/products";
 import AdminDashboard from "../components/dashboard/roleTypes/adminDashboard";
 import Users from "../components/users";
+import Cart from "../components/cart";
 
 
 export const publicRouter = () => {
@@ -54,6 +55,7 @@ export const privateRouter = (isUserLoggedIn=false,getRole) => {
         >
           <Route index element={getRole == 'User' ? <UserDashboard /> : getRole == 'Admin' ? <AdminDashboard /> : <Navigate to={"/"} />} />
           <Route exact path="products" element={getRole == 'User' ? <Products />:  <Navigate to={"/"} />} />
+          <Route exact path="cart" element={getRole == 'User' ? <Cart />:  <Navigate to={"/"} />} />
           <Route exact path="users" element={getRole == 'Admin'? <Users />: <Navigate to={"/"} />} />
 
 

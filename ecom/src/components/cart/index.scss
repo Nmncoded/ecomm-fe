@@ -1,0 +1,45 @@
+.cart {
+  background-color: white;
+
+  &__content {
+    padding: 2.5rem 1rem;
+
+    @media (min-width: 640px) {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    @media (min-width: 1024px) {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  &__title {
+    font-size: 1.875rem;
+    font-weight: bold;
+    color: black;
+  }
+
+  &__layout {
+    margin-top: 3rem;
+    display: grid;
+    gap: 3rem;
+
+    @media (min-width: 1024px) {
+      grid-template-columns: 7fr 5fr;
+      align-items: start;
+      gap: 3rem;
+    }
+  }
+
+  &__items-section {
+    @media (min-width: 1024px) {
+      grid-column: span 7;
+    }
+  }
+
+  &__empty-message {
+    color: #6b7280;
+  }
+}
