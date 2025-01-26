@@ -21,7 +21,6 @@ export const authApi = createApi({
       },
       // invalidatesTags: [],
       transformResponse: async(response) => {
-        console.log(response);
         const newData = {
           ...response,
           isUserLoggedIn: "true",

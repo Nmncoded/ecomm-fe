@@ -5,15 +5,20 @@ import IconButton from "../../common/iconButton";
 import Currency from "../../common/currency";
 import productImg from "../../../assets/product/img.jpg";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addCartItem } from "../../../features/private/slice";
+
 
 const ProductCard = ({ data }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onClick = () => {
     navigate(`/product/${data?.id}`);
   };
 
   const onAddToCart = (event) => {
     event.stopPropagation();
+    dispatch(addCartItem(data));
   };
 
   return (

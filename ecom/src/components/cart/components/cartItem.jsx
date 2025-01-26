@@ -6,7 +6,9 @@ import { X } from 'lucide-react';
 import productImg from "../../../assets/product/img.jpg";
 
 
-const CartItem = ({data}) => {
+
+const CartItem = ({data,onRemove}) => {
+
 
   return (
     <li className="cart-item">
@@ -20,7 +22,7 @@ const CartItem = ({data}) => {
       <div className="cart-item__details">
         <div className="cart-item__remove-btn">
           <IconButton 
-            // onClick={onRemove} 
+            onClick={() => onRemove(data)} 
             icon={<X size={15} />} 
           />
         </div>
@@ -29,9 +31,9 @@ const CartItem = ({data}) => {
             <p className="cart-item__name">{data?.name}</p>
           </div>
           <div className="cart-item__variant-section">
-            <p className="cart-item__variant">{data?.color}</p>
+            <p className="cart-item__variant">{data?.brand}</p>
             <p className="cart-item__variant cart-item__variant--separator">
-              {data?.size}
+              {data?.category}
             </p>
           </div>
           <Currency value={data?.price || 0} />

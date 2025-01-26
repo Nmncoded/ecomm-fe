@@ -13,7 +13,7 @@ export default function AppRouter() {
     }
   };  
   checkAndRedirectUser();
-  console.log(isUserLoggedIn,getRole);
+  // console.log(isUserLoggedIn,getRole);
   
   return (
     <RouterProvider

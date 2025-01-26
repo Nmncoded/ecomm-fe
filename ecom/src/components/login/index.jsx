@@ -28,7 +28,6 @@ const Login = () => {
   };
 
   const onChange = () => {
-    // console.log(`checked = ${e.target.checked}`);
   };
 
   return (

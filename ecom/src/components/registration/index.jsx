@@ -14,7 +14,6 @@ const Registration = () => {
   const [errorMsg, setError] = useState(null);
 
   const handleRegistration = async (values) => {
-    // console.log(values);
     register({
       body: {
         name: values?.name,
@@ -35,7 +34,6 @@ const Registration = () => {
   };
 
   const onChange = () => {
-    // console.log(`checked = ${e.target.checked}`);
   };
 
   return (

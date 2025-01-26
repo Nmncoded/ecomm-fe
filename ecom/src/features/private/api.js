@@ -6,12 +6,12 @@ export const privateApi = api.injectEndpoints({
     createProduct: builder.mutation({
       query: (data) => {
         return {
-          url: `${apiVersion}/createProduct`,
+          url: `${apiVersion}/product`,
           method: "POST",
-          body: data.body,
+          body: data,
         };
       },
-      // invalidatesTags: [''],
+      invalidatesTags: ['getAllProducts'],
       transformResponse: (response) => {
         return response;
       },
@@ -19,14 +19,14 @@ export const privateApi = api.injectEndpoints({
     getAllProducts: builder.query({
       query: () => {
         return {
-          url: `${apiVersion}/getAllProducts`,
+          url: `${apiVersion}/products`,
           method: "GET",
         };
       },
       providesTags: ["getAllProducts"],
       // Pick out data and prevent nested properties in a hook or selector
       transformResponse: (response) => {
-        return response;
+        return response?.data;
       },
       // Pick out errors and prevent nested properties in a hook or selector
     }),

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { privateApi } from './api';
+import { message } from 'antd';
 
 
 const privateSlice = createSlice({
@@ -7,11 +8,28 @@ const privateSlice = createSlice({
   initialState: {
     allProductsData : [],
     isSidebarCollapsed: true,
-  
+    cartItems: [],
   },
   reducers: {
     setSidebarCollapsed: (state, action) => {
       state.isSidebarCollapsed = action.payload;
+    },
+    addCartItem: (state, action) => {
+      const existingItem = state?.cartItems?.find((item) => item.id === action.payload.id)
+      if (existingItem) {
+        message.error(
+          'Item already in cart.',
+        );
+        return state;
+      }else{
+        state.cartItems.push(action.payload);
+        message.success('Item added to cart.');
+      }
+
+    },
+    removeCartItem: (state, action) => {
+      const newData = state.cartItems.filter((item) => item.id !== action.payload)
+      state.cartItems = newData
     },
   },
   extraReducers: (builder) => {
@@ -23,7 +41,7 @@ const privateSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setSidebarCollapsed } = privateSlice.actions
+export const { setSidebarCollapsed, addCartItem, removeCartItem } = privateSlice.actions
 
 export default privateSlice.reducer;
 

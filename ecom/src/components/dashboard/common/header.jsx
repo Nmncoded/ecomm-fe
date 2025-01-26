@@ -3,7 +3,7 @@ import "./header.scss";
 import { Divider, Dropdown, Layout, Row, Space, theme, Button } from "antd";
 import { DownArrowIcon, Logo, UserIcon } from "../../common/svgIcons";
 // import { LogoutOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/auth/slice";
 const { Header } = Layout;
 import ProfileImage from "../../../assets/profile/profile-image.png";
@@ -14,7 +14,8 @@ import { ShoppingBag } from "lucide-react";
 
 const GlobalHeader = () => {
   const navigate = useNavigate()
-  const cartItems= 0;
+  const cartItems = useSelector((state) => state.privateData.cartItems);
+
   const {
     token: { globalHeaderColor },
   } = theme.useToken();
@@ -25,7 +26,7 @@ const GlobalHeader = () => {
   };
 
   const profileData = getCookie("userDTO");
-  console.log(profileData);
+  // console.log(profileData);
 
   const items = [
     {
