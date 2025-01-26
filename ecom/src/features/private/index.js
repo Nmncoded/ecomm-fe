@@ -28,17 +28,17 @@ export const baseQueryWithRefreshToken = fetchBaseQuery({
 
 export const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  if (result?.error?.status === 401) {
+  if (result?.error?.status === 403) {
+    // console.log("token expired ----- ",result);
     const refreshResult = await baseQueryWithRefreshToken(baseUrl + `auth/${apiVersion}/refreshToken`, api,extraOptions);
-    if (refreshResult?.data?.accessToken) {
-      // store the new token in local storage
-      const localStorageData = getCookie('userDTO');
+    // console.log("refreshResult  ----- ",refreshResult);
+
+    if (refreshResult?.data?.access_token) {
+      const localStorageData = JSON.parse(localStorage.getItem("userDTO"));
+      // console.log("localStorageData  ----- ",localStorageData);
       const newData = {
         ...localStorageData,
-        userData: {
-          ...localStorageData?.userData,
-          access_token: refreshResult?.data?.accessToken,
-        },
+        token: refreshResult?.data?.access_token,
       };
       storeCookie("userDTO",newData);
 

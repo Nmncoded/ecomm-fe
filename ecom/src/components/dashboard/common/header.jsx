@@ -26,7 +26,6 @@ const GlobalHeader = () => {
   };
 
   const profileData = getCookie("userDTO");
-  // console.log(profileData);
 
   const items = [
     {
